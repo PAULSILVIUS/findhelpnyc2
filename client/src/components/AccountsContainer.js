@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import axios from "axios";
 import Account from "./Account";
 import NewAccountForm from "./NewAccountForm";
@@ -20,11 +20,11 @@ export default class AccountsContainer extends Component {
 
   componentDidMount() {
     axios
-      .get("api/v1/Accounts.json")
+      .get("api/v1/accounts.json")
       .then((response) => {
         console.log(response);
         this.setState({
-          accounts: response.data,
+        accounts: response.data,
         });
       })
       .catch((error) => console.log(error));
@@ -32,7 +32,7 @@ export default class AccountsContainer extends Component {
 
   addNewAccount(firstname, lastname) {
     axios
-      .post("api/v1/Accounts.json", { account: { firstname, lastname } })
+      .post("api/v1/accounts.json", { account: { firstname, lastname } })
       .then((response) => {
         console.log(response);
         const accounts = [...this.state.accounts, response.data];
@@ -43,7 +43,7 @@ export default class AccountsContainer extends Component {
 
   removeAccount(id) {
     axios
-      .delete("api/v1/Accounts/" + id)
+      .delete("api/v1/accounts/" + id)
       .then((response) => {
         const accounts = this.state.accounts.filter(
           (account) => account.id !== id
