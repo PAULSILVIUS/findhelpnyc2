@@ -1,4 +1,5 @@
-class AccountsController < ApplicationController
+module Api::V1
+  class AccountsController < ApplicationController
   before_action :set_account, only: %i[ show update destroy ]
 
   # GET /accounts
@@ -48,4 +49,5 @@ class AccountsController < ApplicationController
     def account_params
       params.require(:account).permit(:email, :firstname, :lastname, :password, :bio, :cost, :sliding_scale, :specialty, :borough, :address, :zip, :insurance)
     end
+end
 end
