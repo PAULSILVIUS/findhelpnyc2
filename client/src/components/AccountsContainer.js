@@ -1,8 +1,8 @@
-import React from "react";
+import React, { Component } from "react";
 import axios from "axios";
-import Account from "../Account";
-import NewAccountForm from "../NewAccountForm";
-import EditAccountForm from "../EditAccountForm";
+import Account from "./Account";
+import NewAccountForm from "./NewAccountForm";
+import EditAccountForm from "./EditAccountForm";
 
 export default class AccountsContainer extends Component {
   constructor(props) {
