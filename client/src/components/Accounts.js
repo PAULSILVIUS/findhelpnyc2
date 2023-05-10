@@ -14,6 +14,7 @@ const Account = ({ account, onRemoveAccount = (f) => f }) => (
     <p>{account.zip}</p>
     <p>{account.insurance}</p>
     <button onClick={() => onRemoveAccount(account.id)}>Delete Account</button>
+    <button onClick={() => editingAccount(account.id)}>Edit Account</button>
   </div>
 );
 
