@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Account from "./Account";
+import NewAccountForm from "./NewAccountForm";
 
 export default class AccountsContainer extends Component {
   constructor(props) {
@@ -8,6 +9,7 @@ export default class AccountsContainer extends Component {
     this.state = {
       accounts: [],
     };
+    this.addNewAccount = this.addNewAccount.bind(this);
   }
 
   componentDidMount() {
@@ -22,12 +24,23 @@ export default class AccountsContainer extends Component {
       .catch((error) => console.log(error));
   }
 
+  addNewAccount(firstname, lastname) {
+    axios
+      .post("api/v1/Accounts.json", {account: {firstname, lastname}})
+      .then((response) => {
+        console.log(response);
+        const accounts = [...this.state.accounts, response.data];
+      })
+      .catch((error) => console.log(error));
+  }
+
   render() {
     return (
       <div>
         {this.state.accounts.map((account) => {
           return <Account account={account} key={account.id} />;
         })}
+        <NewAccountForm onNewAccount={this.addNewAccount} />
       </div>
     );
   }
