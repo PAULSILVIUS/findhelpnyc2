@@ -10,6 +10,7 @@ export default class AccountsContainer extends Component {
       accounts: [],
     };
     this.addNewAccount = this.addNewAccount.bind(this);
+    this.removeAccount = this.removeAccount.bind(this);
   }
 
   componentDidMount() {
@@ -26,10 +27,22 @@ export default class AccountsContainer extends Component {
 
   addNewAccount(firstname, lastname) {
     axios
-      .post("api/v1/Accounts.json", {account: {firstname, lastname}})
+      .post("api/v1/Accounts.json", { account: { firstname, lastname } })
       .then((response) => {
         console.log(response);
         const accounts = [...this.state.accounts, response.data];
+      })
+      .catch((error) => console.log(error));
+  }
+
+  removeAccount(id) {
+    axios
+      .delete("api/v1/Accounts/" + id)
+      .then((response) => {
+        console.log(response);
+        const accounts = this.state.accounts.filter(
+          (account) => account.id !== id
+        );
       })
       .catch((error) => console.log(error));
   }
