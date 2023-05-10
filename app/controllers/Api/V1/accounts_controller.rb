@@ -37,6 +37,10 @@ module Api::V1
   # DELETE /accounts/1
   def destroy
     @account.destroy
+    if @account.destroy
+      head :no_content,status: :ok
+    else
+      render json: @account.errors, status: :unprocessable_entity
   end
 
   private
