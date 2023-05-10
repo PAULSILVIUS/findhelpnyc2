@@ -1,12 +1,19 @@
 import React from "react";
 
-const Account = ({ account }) => (
-  <div key={account.id}>
-    <h4>{account.firstname} {account.lastname}</h4> 
+const Account = ({ account, onRemoveAccount = (f) => f }) => (
+  <div className="single-account" key={account.id}>
     <p>{account.email}</p>
-    <p>{account.zip}</p>
+    <p>{account.firstname}</p>
+    <p>{account.password}</p>
+    <p>{account.bio}</p>
     <p>{account.cost}</p>
+    <p>{account.sliding_scale}</p>
     <p>{account.specialty}</p>
+    <p>{account.borough}</p>
+    <p>{account.address}</p>
+    <p>{account.zip}</p>
+    <p>{account.insurance}</p>
+    <button onClick={() => onRemoveAccount(account.id)}>Delete Account</button>
   </div>
 );
 
