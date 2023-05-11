@@ -82,5 +82,5 @@ test:
 production:
   <<: *default
   database: findhelpnyc2_production
-  username: findhelpnyc2
+  username: paulsilvius
   password: <%= ENV["FINDHELPNYC2_DATABASE_PASSWORD"] %>

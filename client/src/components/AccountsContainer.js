@@ -15,7 +15,7 @@ export default class AccountsContainer extends Component {
     this.addNewAccount = this.addNewAccount.bind(this);
     this.removeAccount = this.removeAccount.bind(this);
     this.editingAccount = this.editingAccount.bind(this);
-    this.editAccount = this.editAccount.bind(this);
+
   }
 
   componentDidMount() {
@@ -24,15 +24,43 @@ export default class AccountsContainer extends Component {
       .then((response) => {
         console.log(response);
         this.setState({
-        accounts: response.data,
+          accounts: response.data,
         });
       })
       .catch((error) => console.log(error));
   }
 
-  addNewAccount(firstname, lastname) {
+  addNewAccount(
+    email,
+    firstname,
+    lastname,
+    password,
+    bio,
+    cost,
+    sliding_scale,
+    specialty,
+    borough,
+    address,
+    zip,
+    insurance
+  ) {
     axios
-      .post("api/v1/accounts.json", { account: { firstname, lastname } })
+      .post("api/v1/accounts.json", {
+        account: {
+          email,
+          firstname,
+          lastname,
+          password,
+          bio,
+          cost,
+          sliding_scale,
+          specialty,
+          borough,
+          address,
+          zip,
+          insurance,
+        },
+      })
       .then((response) => {
         console.log(response);
         const accounts = [...this.state.accounts, response.data];
@@ -57,21 +85,20 @@ export default class AccountsContainer extends Component {
     this.setState({ editAccountId: id });
   }
 
-  editAccount(firstname, lastname) {
+  editAccount(id,email, firstname, lastname, password, bio, cost, sliding_scale, specialty, borough, address, zip, insurance) {
     axios
       .put("/api/v1/accounts/" + id, {
         account: {
-          firstname,
-          lastname,
+          id,email, firstname, lastname, password, bio, cost, sliding_scale, specialty, borough, address, zip, insurance
         },
       })
       .then((response) => {
         console.log(response);
         const accounts = this.state.accounts;
-        accounts[id - 1] = { firstname, lastname };
+        accounts[id - 1] = { id, email, firstname, lastname, password, bio, cost, sliding_scale, specialty, borough, address, zip, insurance };
         this.setState(() => ({
           accounts,
-          editAccountId: null,
+          editingAccountId: null,
         }));
       })
       .catch((error) => console.log(error));
@@ -89,7 +116,7 @@ export default class AccountsContainer extends Component {
                 editAccount={this.editAccount}
               />
             );
-          } else {
+          } else{
             return (
               <Account
                 account={account}

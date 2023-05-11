@@ -1,6 +1,6 @@
 import React from "react";
 
-const Account = ({ account, onRemoveAccount = (f) => f }) => (
+const Account = ({ account, onRemoveAccount = (f) => f, editingAccount = (f) => f }) => (
   <div className="single-account" key={account.id}>
     <p>{account.email}</p>
     <p>{account.firstname}</p>

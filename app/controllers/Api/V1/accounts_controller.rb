@@ -1,6 +1,6 @@
 module Api::V1
   class AccountsController < ApplicationController
-  before_action :set_account, only: %i[ show update destroy ]
+  before_action :set_account, only: [:show, :update, :destroy]
 
   # GET /accounts
   def index
@@ -19,7 +19,7 @@ module Api::V1
     @account = Account.new(account_params)
 
     if @account.save
-      render json: @account, status: :created
+      render json: @account, status: :created, location: @account
     else
       render json: @account.errors, status: :unprocessable_entity
     end
@@ -53,6 +53,6 @@ module Api::V1
     def account_params
       params.require(:account).permit(:email, :firstname, :lastname, :password, :bio, :cost, :sliding_scale, :specialty, :borough, :address, :zip, :insurance)
     end
-end
+  end
 end
 end
